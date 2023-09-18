@@ -8,8 +8,7 @@ workflows:
     instance_type: mac_mini_m1
     environment:
       vars:
-        PACKAGE_NAME: "io.codemagic.ionicsample"
-        GOOGLE_PLAY_TRACK: alpha
+        PACKAGE_NAME: "com.example.printer"
       node: latest
     triggering:
       events:
