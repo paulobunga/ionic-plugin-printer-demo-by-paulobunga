@@ -28,13 +28,10 @@ workflows:
         script: |
           npm run build
 
-      - name: Sync with Capacitor
-        script: |
-          npx cap sync android
       - name: Set Android SDK location
         script: |
           echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
-      - name: Update dependencies and copy web assets to native project
+      - name: Sync with Capacitor
         script: |
           npx cap sync android
       - name: Build Android debug

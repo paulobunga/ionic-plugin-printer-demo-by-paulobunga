@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicModule, AlertController } from '@ionic/angular';
-import { Printer } from '../../../../capacitor-plugin-printer';
+import { Printer } from 'ionic-plugin-printer-by-paulobunga';
 
 @Component({
   selector: 'app-home',
