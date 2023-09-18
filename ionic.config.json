@@ -1,0 +1,7 @@
+{
+  "name": "JaidiWaelPrinterPluginDemo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

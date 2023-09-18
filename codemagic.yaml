@@ -1,0 +1,50 @@
+# codemagic.yaml
+
+# Define the name and environment for your workflow.
+workflows:
+  ionic-capacitor-android-workflow:
+    name: Ionic Capacitor Android Debug Workflow
+    max_build_duration: 120
+    instance_type: mac_mini_m1
+    environment:
+      android_signing:
+        - keystore_reference
+      groups:
+        - google_play # <-- (Includes GCLOUD_SERVICE_ACCOUNT_CREDENTIALS <-- Put CONTENTS of your Gloud crendentials file here)
+      vars:
+        PACKAGE_NAME: "io.codemagic.ionicsample"
+        GOOGLE_PLAY_TRACK: alpha
+      node: latest
+    triggering:
+      events:
+        - push
+        - tag
+        - pull_request
+      branch_patterns:
+        - pattern: develop
+          include: true
+          source: true
+    scripts:
+      - name: Install npm dependencies for Ionic project
+        script: |
+          npm install
+      - name: Set Android SDK location
+        script: |
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
+      - name: Update dependencies and copy web assets to native project
+        script: |
+          npx cap sync # <- update native dependencies and copy web assets to native project
+      - name: Build Android debug
+        script: |
+          cd $CM_BUILD_DIR/android
+          ./gradlew bundleDebug
+    artifacts:
+      - android/app/build/outputs/**/*.apk
+    publishing:
+      email:
+        recipients:
+          - user_1@example.com
+          - user_2@example.com
+        notify:
+          success: true
+          failure: false

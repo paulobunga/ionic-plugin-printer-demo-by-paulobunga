@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Printer Demo
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Printer Demo</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+
+
+    <!-- Add a button for printing -->
+    <ion-button expand="full" (click)="print()" style="margin: 20px;">Print "Hello, World!"</ion-button>
+  </div>
+</ion-content>
