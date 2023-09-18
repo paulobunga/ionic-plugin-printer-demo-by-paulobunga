@@ -7,13 +7,15 @@ workflows:
     max_build_duration: 120
     instance_type: mac_mini_m1
     environment:
-        node: latest
+      node: latest
     scripts:
-            - npm install
-            - npx cap sync
-            - |
-                # build Android
-                cd android
-                ./gradlew assembleDebug
+      - npm install
+      - npm run build
+      - npx cap sync android
+      - |
+        # Ensure the Gradlew script is executable
+        cd android
+        chmod +x ./gradlew  # Add this line to make gradlew executable
+        ./gradlew assembleDebug
     artifacts:
       - android/app/build/outputs/**/*.apk
