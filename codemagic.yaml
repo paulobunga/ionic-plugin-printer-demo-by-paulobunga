@@ -7,36 +7,13 @@ workflows:
     max_build_duration: 120
     instance_type: mac_mini_m1
     environment:
-      vars:
-        PACKAGE_NAME: "com.example.printer"
-      node: latest
-    triggering:
-      events:
-        - push
-        - tag
-        - pull_request
-      branch_patterns:
-        - pattern: master
-          include: true
-          source: true
+        node: latest
     scripts:
-      - name: Install npm dependencies for Ionic project
-        script: |
-          npm install
-
-      - name: Build Ionic project
-        script: |
-          npm run build
-
-      - name: Set Android SDK location
-        script: |
-          echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
-      - name: Sync with Capacitor
-        script: |
-          npx cap sync android
-      - name: Build Android debug
-        script: |
-          cd android
-          ./gradlew assembleRelease
+            - npm install
+            - npx cap sync
+            - |
+                # build Android
+                cd android
+                ./gradlew assembleDebug
     artifacts:
       - android/app/build/outputs/**/*.apk
