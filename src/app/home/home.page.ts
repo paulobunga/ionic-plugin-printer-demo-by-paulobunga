@@ -29,7 +29,67 @@ export class HomePage {
         });
 
         // Print "Hello, World!"
-        await Printer.print({ content: 'Hello, World!' });
+        await Printer.print({
+          content: {
+            orderNum: '0001',
+            total: '26.4',
+            type: 'Sur place',
+            paiementType: 'Cash',
+            notes: "pas d'olive",
+            company: 'Paris 5',
+            address: '1 rue de bearn 57070 Metz',
+            tel: '0650445371',
+            date: '19/09/2023',
+            hour: '12:07',
+            items: [
+              {
+                title: 'Cheese',
+                price: '9.5',
+                quantity: '1',
+                combinations: [
+                  {
+                    title: 'viande',
+                    choice: ['tenders', 'merguez', 'nuggets'],
+                  },
+                  {
+                    title: 'Sauces',
+                    choice: ['Andalouse', 'Ketchup'],
+                  },
+                ],
+              },
+              {
+                title: 'Hamburger',
+                price: '9.4',
+                quantity: '1',
+                combinations: [
+                  {
+                    title: 'viande',
+                    choice: ['tenders'],
+                  },
+                  {
+                    title: 'sauces',
+                    choice: ['harissa', 'moutarde', 'samourai'],
+                  },
+                ],
+              },
+              {
+                title: 'Brochette de poulet',
+                price: '7.5',
+                quantity: '1',
+                combinations: [
+                  {
+                    title: 'sauces',
+                    choice: ['mayonnaise'],
+                  },
+                  {
+                    title: 'viande',
+                    choice: ['cordon bleu'],
+                  },
+                ],
+              },
+            ],
+          },
+        });
 
         // Disconnect from the printer when done
         await Printer.disconnect();
